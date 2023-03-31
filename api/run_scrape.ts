@@ -7,6 +7,8 @@ import Job from '../src/interfaces/jobs';
 const dotenv = require('dotenv')
 
 dotenv.config();
+
+module.exports = (req:any, res:any )=> {
 const supabaseUrl = "https://dkwqunprrqmhmbtnfuzs.supabase.co";
 const supabaseKey: any = process.env.SUPABASE_KEY;
 
@@ -66,6 +68,7 @@ const main = async () => {
 
 main();
 
+}
 
 
 
