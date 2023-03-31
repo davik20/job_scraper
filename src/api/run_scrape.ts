@@ -66,9 +66,10 @@ export async function run_scrape(req: any, res: any): Promise<void> {
 
 
   const main = async () => {
+    res.status(200).send("Running function");
     const jobArrays = await scrape(companies);
     const jobs = jobArrays.flat();
-    res.send(200);
+  
     await storeJobs(jobs);
     console.log(jobs);
   };
