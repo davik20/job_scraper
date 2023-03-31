@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es2018",
+      "module": "CommonJS",
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "dist",
+      "moduleResolution": "node",
+      "sourceMap": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+  }
+
+  
+  

@@ -1,0 +1,35 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsynowiec/node-typescript-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsynowiec/node-typescript-boilerplate/issues"
+  },
+  "homepage": "https://github.com/jsynowiec/node-typescript-boilerplate#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.10",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.12.1",
+    "cheerio": "*",
+    "dotenv": "^16.0.3",
+    "node-fetch": "^2.6.9",
+    "puppeteer": "^19.8.0"
+  }
+}
