@@ -38,13 +38,15 @@ export async function run_scrape(req: any, res: any): Promise<void> {
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
-        // Add any other arguments you need
+        '--disable-dev-shm-usage',
+        '--single-process',
       ],
     });
+
     const promises = companies.map(async (company: Company) => {
       const jobs: Job[] = [];
       const page = await browser.newPage();
-      await page.goto(company.url);
+      await page.goto(company.url, {timeout:100000});
       const content = await page.content();
       const $ = cheerio.load(content);
       const $jobs = $(company.selector);
@@ -67,7 +69,6 @@ export async function run_scrape(req: any, res: any): Promise<void> {
 
   const main = async () => {
   
-
     try {
       const jobArrays = await scrape(companies);
       const jobs = jobArrays.flat();
