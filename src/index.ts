@@ -9,40 +9,12 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 
-// const scrape  = async (companies:Company[]):Promise<Job[][]> => {
-//     const browser = await puppeteer.launch();
-//     const jobs: Job[] = [];
-
-//     let promises = companies.map((company:Company) => {
-//         const jobs:Job[] = []
-//         return new Promise(async (resolve,reject) => {
-//             const page = await browser.newPage();
-//             await page.goto(company.url);
-//             let content = await page.content()
-//             const $ = cheerio.load(content);
-//             const $jobs = $(company.selector);
-//             $jobs.each((i, e) => {
-//                 let title = $(e).text().trim();
-//                 jobs.push({ title, company: company.name }); 
-//             })
-
-//             resolve(jobs);
-
-
-//         })
-//     })
-//    let results:Job[] = await Promise.all(promises);
-//    browser.close();
-//    return results;
-// }
-
-
 
 
 // Replace these with your Supabase API details
 
 const supabaseUrl = "https://dkwqunprrqmhmbtnfuzs.supabase.co";
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseKey:any = process.env.SUPABASE_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -52,7 +24,7 @@ async function storeJobs(jobs: Job[]): Promise<void> {
   
       const { error } = await supabase
         .from('jobs')
-        .insert([{ title, company }], { upsert: true });
+        .insert([{ title, company }], { });
   
         if (error && error.code === '23505') {
           console.log('Duplicate entry:', job);
