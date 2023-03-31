@@ -1,9 +1,9 @@
 const fetch = require('node-fetch')
 import * as cheerio from 'cheerio';
-import { companies, Company } from '../src/constants/companies';
+import { companies, Company } from '../constants/companies';
 import { createClient } from '@supabase/supabase-js';
 import puppeteer from 'puppeteer'
-import Job from '../src/interfaces/jobs';
+import Job from '../interfaces/jobs';
 const dotenv = require('dotenv')
 
 
@@ -61,9 +61,6 @@ export async function run_scrape(req: any, res: any): Promise<void> {
     await browser.close();
     return results;
   };
-
-
-
 
 
 

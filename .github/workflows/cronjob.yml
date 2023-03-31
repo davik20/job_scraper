@@ -1,0 +1,26 @@
+name: Call run_scrape API
+
+on:
+  schedule:
+    # Runs every day at 01:00 AM (UTC)
+    - cron: '0 1 * * *'
+
+jobs:
+  callRunScrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Call /api/run_scrape route
+      run: |
+        curl -X GET "https://jobscraper-production.up.railway.app/api/run_scrape"
