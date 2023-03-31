@@ -6,9 +6,13 @@ import puppeteer from 'puppeteer'
 import Job from '../src/interfaces/jobs';
 const dotenv = require('dotenv')
 
+
+
+
+
 dotenv.config();
 
-module.exports = (req:any, res:any )=> {
+export async function run_scrape(req: any, res: any): Promise<void> {
 const supabaseUrl = "https://dkwqunprrqmhmbtnfuzs.supabase.co";
 const supabaseKey: any = process.env.SUPABASE_KEY;
 
@@ -64,11 +68,15 @@ const main = async () => {
   const jobs = jobArrays.flat();
   await storeJobs(jobs);
   console.log(jobs);
+  res.status(200).json(jobs);
+
 };
 
 main();
 
 }
+
+
 
 
 
