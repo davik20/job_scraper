@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/run_scrape.ts",
-      "schedule": "0 16 * * *"
+      "schedule": "0 17 * * *"
     }
   ],
   "builds": [
@@ -14,8 +14,13 @@
   ],
   "routes": [
     {
+        "src": "/api/run_scrape.ts",
+        "dest": "/api/run_scrape.ts"
+    },
+    {
         "src": "/(.*)",
         "dest": "/src/index.ts"
     }
+  
   ]
 }
