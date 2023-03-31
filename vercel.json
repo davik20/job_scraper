@@ -1,4 +1,10 @@
 {
+    "functions": {
+        "dailyFunction": {
+          "handler": "/src/index.ts",
+          "schedule": "*/5 * * * *"
+        }
+      },
     "version": 2,
     "builds": [
       { "src": "index.js", "use": "@vercel/node" }
