@@ -1,7 +1,10 @@
 // app.ts
 
+
+import { run_scrape } from '../api/run_scrape'
+
 import express from 'express';
-import { run_scrape } from './api/run_scrape';
+
 
 const app = express();
 const port = process.env.PORT || 3000;

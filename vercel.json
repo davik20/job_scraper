@@ -1,12 +1,21 @@
 {
   "version": 2,
-  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
-
-  "routes": [{ "src": "/(.*)", "dest": "/" }],
   "crons": [
     {
       "path": "/api/run_scrape.ts",
-      "schedule": "0 15 * * *"
+      "schedule": "0 16 * * *"
+    }
+  ],
+  "builds": [
+    {
+        "src": "/src/index.ts",
+        "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+        "src": "/(.*)",
+        "dest": "index.js"
     }
   ]
 }
