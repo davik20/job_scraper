@@ -12,49 +12,55 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 export async function run_scrape(req: any, res: any): Promise<void> {
-const supabaseUrl = "https://dkwqunprrqmhmbtnfuzs.supabase.co";
-const supabaseKey: any = process.env.SUPABASE_KEY;
+  const supabaseUrl = "https://dkwqunprrqmhmbtnfuzs.supabase.co";
+  const supabaseKey: any = process.env.SUPABASE_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function storeJobs(jobs: Job[]): Promise<void> {
-  for (const job of jobs) {
-    const { title, company } = job;
+  async function storeJobs(jobs: Job[]): Promise<void> {
+    for (const job of jobs) {
+      const { title, company } = job;
 
-    const { error } = await supabase
-      .from('jobs')
-      .insert([{ title, company }], {});
+      const { error } = await supabase
+        .from('jobs')
+        .insert([{ title, company }], {});
 
-    if (error && error.code === '23505') {
-      console.log('Duplicate entry:', job);
-    } else if (error) {
-      console.error('Error inserting job:', error);
+      if (error && error.code === '23505') {
+        console.log('Duplicate entry:', job);
+      } else if (error) {
+        console.error('Error inserting job:', error);
+      }
     }
   }
-}
 
-const scrape = async (companies: Company[]): Promise<Job[][]> => {
-  const browser = await puppeteer.launch();
-  const promises = companies.map(async (company: Company) => {
-    const jobs: Job[] = [];
-    const page = await browser.newPage();
-    await page.goto(company.url);
-    const content = await page.content();
-    const $ = cheerio.load(content);
-    const $jobs = $(company.selector);
+  const scrape = async (companies: Company[]): Promise<Job[][]> => {
+    const browser = await puppeteer.launch({
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        // Add any other arguments you need
+      ],
+    });
+    const promises = companies.map(async (company: Company) => {
+      const jobs: Job[] = [];
+      const page = await browser.newPage();
+      await page.goto(company.url);
+      const content = await page.content();
+      const $ = cheerio.load(content);
+      const $jobs = $(company.selector);
 
-    $jobs.each((_, e) => {
-      const title = $(e).text().trim();
-      jobs.push({ title, company: company.name });
+      $jobs.each((_, e) => {
+        const title = $(e).text().trim();
+        jobs.push({ title, company: company.name });
+      });
+
+      return jobs;
     });
 
-    return jobs;
-  });
-
-  const results = await Promise.all(promises);
-  await browser.close();
-  return results;
-};
+    const results = await Promise.all(promises);
+    await browser.close();
+    return results;
+  };
 
 
 
@@ -62,15 +68,15 @@ const scrape = async (companies: Company[]): Promise<Job[][]> => {
 
 
 
-const main = async () => {
-  const jobArrays = await scrape(companies);
-  const jobs = jobArrays.flat();
-  await storeJobs(jobs);
-  console.log(jobs);
-  res.send(200)
-};
+  const main = async () => {
+    const jobArrays = await scrape(companies);
+    const jobs = jobArrays.flat();
+    await storeJobs(jobs);
+    console.log(jobs);
+    res.send(200)
+  };
 
-main();
+  main();
 
 }
 
