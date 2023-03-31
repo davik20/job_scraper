@@ -6,7 +6,7 @@
   "cron": [
     {
       "path": "/api/run_scrape.ts",
-      "schedule": "0 5 * * *"
+      "schedule": "*/5 * * * *"
     }
   ]
 }
