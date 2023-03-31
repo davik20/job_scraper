@@ -58,7 +58,7 @@ export async function run_scrape(req: any, res: any): Promise<void> {
     });
 
     const results = await Promise.all(promises);
-    await browser.close();
+    // await browser.close();
     return results;
   };
 
