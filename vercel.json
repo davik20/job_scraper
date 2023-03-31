@@ -6,7 +6,7 @@
   "crons": [
     {
       "path": "/api/run_scrape.ts",
-      "schedule": "*/5 * * * *"
+      "schedule": "* 14 * * * *"
     }
   ]
 }
