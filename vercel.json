@@ -1,7 +1,7 @@
 {
     "functions": {
         "dailyFunction": {
-          "handler": "/src/index.ts",
+          "handler": "/api/run_scrape.ts",
           "schedule": "*/5 * * * *"
         }
       },
