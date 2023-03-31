@@ -2,7 +2,11 @@ const fetch = require('node-fetch')
 import * as cheerio from 'cheerio';
 import { companies, Company } from '../src/constants/companies';
 import { createClient } from '@supabase/supabase-js';
-import puppeteer from 'puppeteer'
+import puppeteer, {Browser} from 'puppeteer-core'
+import chromium from 'chrome-aws-lambda';
+
+
+
 import Job from '../src/interfaces/jobs';
 const dotenv = require('dotenv')
 dotenv.config();
@@ -30,7 +34,14 @@ async function storeJobs(jobs: Job[]): Promise<void> {
 }
 
 const scrape = async (companies: Company[]): Promise<Job[][]> => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch(
+    {
+      args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
+    }
+  );
   const promises = companies.map(async (company: Company) => {
     const jobs: Job[] = [];
     const page = await browser.newPage();

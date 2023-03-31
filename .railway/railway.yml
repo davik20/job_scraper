@@ -1,0 +1,4 @@
+# .railway/railway.yml
+deployment:
+  type: "node"
+  command: "npm start"
