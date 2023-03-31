@@ -5,9 +5,6 @@ import { createClient } from '@supabase/supabase-js';
 import puppeteer from 'puppeteer'
 import Job from '../src/interfaces/jobs';
 const dotenv = require('dotenv')
-
-
-
 dotenv.config();
 
 export async function run_scrape(req: any, res: any): Promise<void> {
