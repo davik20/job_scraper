@@ -3,7 +3,7 @@ name: Call run_scrape API
 on:
   schedule:
     # Runs every day at 01:00 AM (UTC)
-  - cron: '*/10 * * * *'
+    - cron: '0 1 * * *'
 
 jobs:
   callRunScrape:
