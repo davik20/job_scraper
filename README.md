@@ -36,14 +36,16 @@ npm start
 
 ### Project Structure
 The main components of the project are organized as follows:
+Entry point of the application.
 ```
 src/index.ts: 
 ```
-Entry point of the application.
+
+Contains the GitHub Actions workflow configuration file for automating the scraper execution.
 ```
 .github/workflows/:
 ```
-Contains the GitHub Actions workflow configuration file for automating the scraper execution.
+
 
 
 
