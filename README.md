@@ -51,6 +51,7 @@ Contains the GitHub Actions workflow configuration file for automating the scrap
 
 ### Environment variables
 SUPABASE_URL=
+
 SUPABASE_KEY=
 
 keys to be sent via email
